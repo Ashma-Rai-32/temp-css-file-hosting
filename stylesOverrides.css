@@ -11,5 +11,6 @@
 
 .change-me {
   border: 3px red !important;
-  background: black !important;
+  background-color: black !important;
+  color: red !important;
 }
