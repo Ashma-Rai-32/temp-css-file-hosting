@@ -1,14 +1,9 @@
-.k-heading{
-  border:red !important;
-  border-width:3px !important;
-  background: black !important;
+.k-field-wrapper {  
+    border-width: 3px !important;
+  }
+.k-number-wrapper .k-number-field{
+  border-width: 0px !important;
 }
-.k-field-wrapper{
-  border:red !important;
-  border-width:3px !important;
-  background: black !important;
-}
-
 .change-me {
   border: 3px red !important;
   background-color: black !important;
