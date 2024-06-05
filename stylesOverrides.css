@@ -8,3 +8,8 @@
   border-width:3px !important;
   background: black !important;
 }
+
+.change-me {
+  border: 3px red !important;
+  background: black !important;
+}
