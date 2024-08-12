@@ -1,16 +1,3 @@
-.k-field-wrapper {
-  border-width: 3px !important;
-}
-.k-number-wrapper .k-number-field {
-  border-width: 0px !important;
-}
-
-.k-date-input {
-  background-color: red !important;
-}
-
-.change-me {
-  border: 3px red !important;
-  background-color: black !important;
-  color: red !important;
+.k-tile {
+  gap: 1.5rem;
 }
