@@ -5,11 +5,17 @@ on:
     branches:
       - main # Trigger the workflow on push to the main branch
 
+permissions:
+  contents: write # Grant permission to create a release
+
 jobs:
   create_release:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
       - name: Get latest tag
         id: get_latest_tag
         run: |
@@ -28,10 +34,9 @@ jobs:
 
       - name: Create a new release
         uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.increment_version.outputs.new_version }}
           release_name: "Release ${{ steps.increment_version.outputs.new_version }}"
           draft: false
           prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }} # Use the GITHUB_TOKEN with the correct permissions
