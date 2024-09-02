@@ -6,6 +6,10 @@
   color: inherit !important;
 }
 
+.popup-button:hover {
+  background: var(--button-color-primary);
+}
+
 .popup-modal .popup-modal-content {
   overflow: auto;
   display: flex;
