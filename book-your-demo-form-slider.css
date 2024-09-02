@@ -1,9 +1,14 @@
 .slider-button {
   text-shadow: none;
+  transition: all 200ms ease;
 }
 
 .slider-button:disabled {
   color: inherit !important;
+}
+
+.slider-button:hover {
+  background: var(--button-color-primary) !important;
 }
 
 .slider-modal .slider-modal-content-wrapper .modal-close-button {

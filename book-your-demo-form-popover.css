@@ -26,6 +26,7 @@
 
 .popover-container.popover-modal-content.dynamic-content {
   padding: 2rem !important;
+  background: red !important;
 }
 
 .popover-container.popover-modal-content.dynamic-content.submit-button-and-page-nav-wrapper.submit-button {
