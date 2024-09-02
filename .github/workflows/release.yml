@@ -21,32 +21,49 @@ jobs:
         run: |
           # Retrieve the latest tag or set to v0.0.0 if no tags exist
           latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1) 2>/dev/null || echo "v0.0.0")
-          echo "latest_tag=$latest_tag" >> $GITHUB_OUTPUT
+          echo "latest_tag=$latest_tag" >> $GITHUB_ENV
 
-      - name: Set new version
-        id: set_version
+      - name: Increment version
+        id: increment_version
         run: |
-          # Define your new starting version
+          # Define new starting version
           new_start_version="v0.0.0"
-          latest_tag="${{ steps.get_latest_tag.outputs.latest_tag }}"
-          # Check if the latest tag is less than the new starting version
-          if [ "$(printf '%s\n' "$latest_tag" "$new_start_version" | sort -V | head -n1)" != "$new_start_version" ]; then
-            echo "new_version=$new_start_version" >> $GITHUB_OUTPUT
+          latest_tag="${{ env.latest_tag }}"
+          if [ "$latest_tag" = "$new_start_version" ]; then
+            new_version=$new_start_version
           else
-            # Increment version if latest tag is not less than the new start version
+            # Increment version
             version="${latest_tag#v}"  # Remove the 'v' prefix
             IFS='.' read -r major minor patch <<< "$version"
             new_patch=$((patch + 1))
             new_version="v$major.$minor.$new_patch"
-            echo "new_version=$new_version" >> $GITHUB_OUTPUT
+          fi
+          echo "new_version=$new_version" >> $GITHUB_ENV
+
+      - name: Check if tag exists
+        id: check_tag_exists
+        run: |
+          # Check if the tag already exists
+          tag_exists=$(git tag -l "${{ env.new_version }}" | wc -l)
+          if [ "$tag_exists" -ne 0 ]; then
+            echo "Tag ${{ env.new_version }} already exists. Incrementing patch version."
+            exit 1
           fi
 
       - name: Create a new release
+        if: failure() # Runs only if the previous step fails
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use GITHUB_TOKEN from environment
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.set_version.outputs.new_version }}
-          release_name: "Release ${{ steps.set_version.outputs.new_version }}"
+          tag_name: ${{ env.new_version }}
+          release_name: "Release ${{ env.new_version }}"
           draft: false
           prerelease: false
+
+      - name: Handle tag increment failure
+        if: failure() # Runs only if the previous step fails
+        run: |
+          echo "Creating release for the next incremented version."
+          # Handle the incremented version
+          # ... (Add logic here if needed)
