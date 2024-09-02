@@ -19,19 +19,21 @@ jobs:
       - name: Get latest tag
         id: get_latest_tag
         run: |
-          latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1) 2>/dev/null || echo "v2.0.0")
+          # Retrieve the latest tag or set to v0.0.0 if no tags exist
+          latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1) 2>/dev/null || echo "v0.0.0")
           echo "latest_tag=$latest_tag" >> $GITHUB_OUTPUT
 
       - name: Set new version
         id: set_version
         run: |
+          # Define your new starting version
+          new_start_version="v0.0.0"
           latest_tag="${{ steps.get_latest_tag.outputs.latest_tag }}"
-          # Define your new starting version here
-          new_start_version="v3.0.0"
-          # Check if the latest tag is lower than the new starting version
+          # Check if the latest tag is less than the new starting version
           if [ "$(printf '%s\n' "$latest_tag" "$new_start_version" | sort -V | head -n1)" != "$new_start_version" ]; then
             echo "new_version=$new_start_version" >> $GITHUB_OUTPUT
           else
+            # Increment version if latest tag is not less than the new start version
             version="${latest_tag#v}"  # Remove the 'v' prefix
             IFS='.' read -r major minor patch <<< "$version"
             new_patch=$((patch + 1))
@@ -39,16 +41,7 @@ jobs:
             echo "new_version=$new_version" >> $GITHUB_OUTPUT
           fi
 
-      - name: Check if tag already exists
-        id: check_tag
-        run: |
-          if git rev-parse "${{ steps.set_version.outputs.new_version }}" >/dev/null 2>&1; then
-            echo "Tag already exists: ${{ steps.set_version.outputs.new_version }}"
-            exit 1
-          fi
-
       - name: Create a new release
-        if: success()
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use GITHUB_TOKEN from environment
