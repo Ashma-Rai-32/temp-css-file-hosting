@@ -20,24 +20,14 @@
   box-shadow: rgba(0, 18, 46, 0.24) 0px 6px 32px 0px !important;
 }
 
+.popover-container.popover-modal-content {
+  box-shadow: rgba(0, 18, 46, 0.16) 0px 8px 36px 0px !important;
+}
+
 .popover-container.popover-modal-content.dynamic-content {
   padding: 2rem !important;
 }
 
-.popover-container.popover-modal-content {
-  box-shadow: rgba(0, 18, 46, 0.16) 0px 8px 36px 0px !important;
-}
-//*[@id="clevero-forms-modal-r2RY"]/div/div[1]/div/div/div[2]/div[2]/div/button
-.popover-container.popover-modal-content.dynamic-content
-  > div
-  > div
-  > div.grid-container
-  > div.submit-button-and-page-nav-wrapper
-  > div
-  > button {
-  padding: 1rem !important;
-}
-
-.popover-container.popover-modal-content.dynamic-content.grid-container.submit-button-and-page-nav-wrapper.submit-button {
+.popover-container.popover-modal-content.dynamic-content.submit-button-and-page-nav-wrapper.submit-button {
   padding: 0.5rem !important;
 }

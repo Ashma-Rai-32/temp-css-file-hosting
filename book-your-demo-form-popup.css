@@ -1,5 +1,6 @@
 .popup-button {
   text-shadow: none;
+  transition: all 200ms ease;
 }
 
 .popup-button:disabled {
@@ -7,7 +8,7 @@
 }
 
 .popup-button:hover {
-  background: var(--button-color-primary);
+  background: var(--button-color-primary) !important;
 }
 
 .popup-modal .popup-modal-content {
