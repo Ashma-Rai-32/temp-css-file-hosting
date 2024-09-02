@@ -37,3 +37,7 @@
   > button {
   padding: 1rem !important;
 }
+
+.popover-container.popover-modal-content.dynamic-content.grid-container.submit-button-and-page-nav-wrapper.submit-button {
+  padding: 0.5rem !important;
+}
