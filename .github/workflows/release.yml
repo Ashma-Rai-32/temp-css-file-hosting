@@ -1,56 +1,56 @@
-name: Draft Release
+# name: Draft Release
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+# jobs:
+#   release:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
 
-      - name: Set up Git
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+#       - name: Set up Git
+#         run: |
+#           git config user.name "GitHub Actions"
+#           git config user.email "actions@github.com"
 
-      - name: Get latest tag
-        id: get-latest-tag
-        run: |
-          # Fetch all tags
-          git fetch --tags
-          # Get the latest tag, or default to v0.0.0 if none exists
-          TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          echo "LATEST_TAG=$TAG" >> $GITHUB_ENV
-          echo "Latest tag: $TAG"
+#       - name: Get latest tag
+#         id: get-latest-tag
+#         run: |
+#           # Fetch all tags
+#           git fetch --tags
+#           # Get the latest tag, or default to v0.0.0 if none exists
+#           TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+#           echo "LATEST_TAG=$TAG" >> $GITHUB_ENV
+#           echo "Latest tag: $TAG"
 
-      - name: Determine next version
-        id: determine-version
-        run: |
-          # Extract the version number and increment it
-          VERSION=${LATEST_TAG:-v0.0.0}
-          VERSION_NUMBER=$(echo $VERSION | sed 's/^v//')
-          VERSION_PARTS=(${VERSION_NUMBER//./ })
-          PATCH=$((VERSION_PARTS[2] + 1))
-          NEXT_VERSION="v${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$PATCH"
-          echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
-          echo "Next version: $NEXT_VERSION"
+#       - name: Determine next version
+#         id: determine-version
+#         run: |
+#           # Extract the version number and increment it
+#           VERSION=${LATEST_TAG:-v0.0.0}
+#           VERSION_NUMBER=$(echo $VERSION | sed 's/^v//')
+#           VERSION_PARTS=(${VERSION_NUMBER//./ })
+#           PATCH=$((VERSION_PARTS[2] + 1))
+#           NEXT_VERSION="v${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$PATCH"
+#           echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
+#           echo "Next version: $NEXT_VERSION"
 
-      - name: Create new tag
-        id: create-tag
-        run: |
-          # Create a new tag
-          git tag -a "$NEXT_VERSION" -m "Release version $NEXT_VERSION"
-          git push origin "$NEXT_VERSION"
+#       - name: Create new tag
+#         id: create-tag
+#         run: |
+#           # Create a new tag
+#           git tag -a "$NEXT_VERSION" -m "Release version $NEXT_VERSION"
+#           git push origin "$NEXT_VERSION"
 
-      - name: Create GitHub draft release
-        run: |
-          # Create a draft release with the new tag
-          curl -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -d "{\"tag_name\": \"$NEXT_VERSION\", \"name\": \"Draft Release $NEXT_VERSION\", \"draft\": true, \"prerelease\": false}" \
-            https://api.github.com/repos/${{ github.repository }}/releases
+#       - name: Create GitHub draft release
+#         run: |
+#           # Create a draft release with the new tag
+#           curl -X POST \
+#             -H "Accept: application/vnd.github.v3+json" \
+#             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+#             -d "{\"tag_name\": \"$NEXT_VERSION\", \"name\": \"Draft Release $NEXT_VERSION\", \"draft\": true, \"prerelease\": false}" \
+#             https://api.github.com/repos/${{ github.repository }}/releases
