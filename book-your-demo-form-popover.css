@@ -19,3 +19,11 @@
 .popover-button:hover {
   box-shadow: rgba(0, 18, 46, 0.24) 0px 6px 32px 0px !important;
 }
+
+.popover-container.popover-modal-content.dynamic-content {
+  padding: 2rem !important;
+}
+
+.popover-container.popover-modal-content {
+  box-shadow: rgba(0, 18, 46, 0.16) 0px 8px 36px 0px !important;
+}
