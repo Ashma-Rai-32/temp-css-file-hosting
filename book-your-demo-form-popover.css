@@ -33,8 +33,13 @@
   padding: 3rem !important;
   background: #fff !important;
 } */
-
-.submit-button .k-button:not(.no-flex) {
+.popover-container
+  .popover-modal-content
+  .dynamic-content
+  .grid-container
+  .submit-button-and-page-nav-wrapper
+  .submit-button
+  .k-button:not(.no-flex) {
   padding: 1rem !important; //okm
   background: red !important;
 }
