@@ -35,6 +35,6 @@
 } */
 
 .submit-button .k-button:not(.no-flex) {
-  padding: 1rem !important; /* Adjust the padding value as needed */
+  padding: 1rem !important;
   background: red !important;
 }
