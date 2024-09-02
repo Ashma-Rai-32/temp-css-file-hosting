@@ -11,6 +11,10 @@
   padding: 10px 15px !important;
   border-radius: 1rem !important;
   font-size: medium !important;
-  height: inherit !important;
+  height: 2.5rem !important;
+  box-shadow: rgba(0, 18, 46, 0.24) 0px 6px 32px 0px !important;
+}
+
+.popover-button:hover {
   box-shadow: rgba(0, 18, 46, 0.24) 0px 6px 32px 0px !important;
 }
