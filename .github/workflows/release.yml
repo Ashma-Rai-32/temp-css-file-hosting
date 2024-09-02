@@ -1,69 +1,55 @@
-name: Auto Release
+name: Draft Release
 
 on:
   push:
     branches:
-      - main # Trigger the workflow on push to the main branch
-
-permissions:
-  contents: write # Grant permission to create a release
+      - main
 
 jobs:
-  create_release:
+  release:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out the repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
       - name: Get latest tag
-        id: get_latest_tag
+        id: get-latest-tag
         run: |
-          # Retrieve the latest tag or set to v0.0.0 if no tags exist
-          latest_tag=$(git describe --tags $(git rev-list --tags --max-count=1) 2>/dev/null || echo "v0.0.0")
-          echo "latest_tag=$latest_tag" >> $GITHUB_ENV
+          # Fetch all tags and get the latest one
+          git fetch --tags
+          TAG=$(git describe --tags --abbrev=0)
+          echo "LATEST_TAG=$TAG" >> $GITHUB_ENV
+          echo "Latest tag: $TAG"
 
-      - name: Increment version
-        id: increment_version
+      - name: Determine next version
+        id: determine-version
         run: |
-          # Define new starting version
-          new_start_version="v0.0.0"
-          latest_tag="${{ env.latest_tag }}"
-          if [ "$latest_tag" = "$new_start_version" ]; then
-            new_version=$new_start_version
-          else
-            # Increment version
-            version="${latest_tag#v}"  # Remove the 'v' prefix
-            IFS='.' read -r major minor patch <<< "$version"
-            new_patch=$((patch + 1))
-            new_version="v$major.$minor.$new_patch"
-          fi
-          echo "new_version=$new_version" >> $GITHUB_ENV
+          # Determine the next version based on the latest tag
+          VERSION=${LATEST_TAG:-v0.0.0}
+          VERSION_NUMBER=$(echo $VERSION | sed 's/^v//')
+          VERSION_PARTS=(${VERSION_NUMBER//./ })
+          PATCH=$((VERSION_PARTS[2] + 1))
+          NEXT_VERSION="v${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$PATCH"
+          echo "NEXT_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
+          echo "Next version: $NEXT_VERSION"
 
-      - name: Check if tag exists
-        id: check_tag_exists
+      - name: Create new tag
+        id: create-tag
         run: |
-          # Check if the tag already exists
-          tag_exists=$(git tag -l "${{ env.new_version }}" | wc -l)
-          if [ "$tag_exists" -ne 0 ]; then
-            echo "Tag ${{ env.new_version }} already exists. Incrementing patch version."
-            exit 1
-          fi
+          # Create a new tag
+          git tag -a "$NEXT_VERSION" -m "Release version $NEXT_VERSION"
+          git push origin "$NEXT_VERSION"
 
-      - name: Create a new release
-        if: failure() # Runs only if the previous step fails
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.new_version }}
-          release_name: "Release ${{ env.new_version }}"
-          draft: false
-          prerelease: false
-
-      - name: Handle tag increment failure
-        if: failure() # Runs only if the previous step fails
+      - name: Create GitHub draft release
         run: |
-          echo "Creating release for the next incremented version."
-          # Handle the incremented version
-          # ... (Add logic here if needed)
+          # Create a draft release with the new tag
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d "{\"tag_name\": \"$NEXT_VERSION\", \"name\": \"Draft Release $NEXT_VERSION\", \"draft\": true, \"prerelease\": false}" \
+            https://api.github.com/repos/${{ github.repository }}/releases
