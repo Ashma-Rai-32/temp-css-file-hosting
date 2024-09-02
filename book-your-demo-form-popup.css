@@ -1,3 +1,11 @@
+.popup-button {
+  text-shadow: none;
+}
+
+.popup-button:disabled {
+  color: inherit !important;
+}
+
 .popup-modal .popup-modal-content {
   overflow: auto;
   display: flex;
