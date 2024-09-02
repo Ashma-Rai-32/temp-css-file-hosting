@@ -1,0 +1,6 @@
+@media (max-width: 700px) {
+  .popover-container > div {
+    bottom: 8rem !important;
+    right: 1.5rem !important;
+  }
+}
