@@ -33,7 +33,7 @@
   padding: 3rem !important;
   background: #fff !important;
 } */
-.submit-button {
+.submit-button.k-button {
   padding: 1rem !important; /* Adjust the padding value as needed */
   background: red !important;
 }
