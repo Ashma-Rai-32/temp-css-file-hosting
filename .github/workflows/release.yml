@@ -20,16 +20,17 @@ jobs:
       - name: Get latest tag
         id: get-latest-tag
         run: |
-          # Fetch all tags and get the latest one
+          # Fetch all tags
           git fetch --tags
-          TAG=$(git describe --tags --abbrev=0)
+          # Get the latest tag, or default to v0.0.0 if none exists
+          TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           echo "LATEST_TAG=$TAG" >> $GITHUB_ENV
           echo "Latest tag: $TAG"
 
       - name: Determine next version
         id: determine-version
         run: |
-          # Determine the next version based on the latest tag
+          # Extract the version number and increment it
           VERSION=${LATEST_TAG:-v0.0.0}
           VERSION_NUMBER=$(echo $VERSION | sed 's/^v//')
           VERSION_PARTS=(${VERSION_NUMBER//./ })
