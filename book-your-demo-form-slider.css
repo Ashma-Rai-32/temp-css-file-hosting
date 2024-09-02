@@ -1,3 +1,11 @@
+.slider-button {
+  text-shadow: none;
+}
+
+.slider-button:disabled {
+  color: inherit !important;
+}
+
 .slider-modal .slider-modal-content-wrapper .modal-close-button {
   background: transparent !important;
   position: relative !important;
