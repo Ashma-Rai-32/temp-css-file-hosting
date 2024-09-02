@@ -35,6 +35,6 @@
 } */
 
 .submit-button .k-button:not(.no-flex) {
-  padding: 1rem !important;
+  padding: 1rem !important; //okm
   background: red !important;
 }
