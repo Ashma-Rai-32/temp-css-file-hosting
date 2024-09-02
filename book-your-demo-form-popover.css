@@ -33,10 +33,7 @@
   padding: 3rem !important;
   background: #fff !important;
 } */
-.popover-container.popover-modal-content.dynamic-content
-  .grid-container
-  .submit-button-and-page-nav-wrapper
-  > div
-  > button.k-button {
+.popover-container.popover-modal-content.submit-button {
   padding: 1rem !important; /* Adjust the padding value as needed */
+  background: red !important;
 }
