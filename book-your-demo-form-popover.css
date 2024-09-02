@@ -33,7 +33,7 @@
   padding: 3rem !important;
   background: #fff !important;
 } */
-.popover-container.popover-modal-content.submit-button {
+.submit-button {
   padding: 1rem !important; /* Adjust the padding value as needed */
   background: red !important;
 }
