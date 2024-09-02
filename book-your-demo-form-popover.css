@@ -24,7 +24,7 @@
   box-shadow: rgba(0, 18, 46, 0.16) 0px 8px 36px 0px !important;
 }
 
-.popover-container.popover-modal-content.dynamic-content.submit-button-and-page-nav-wrapper.submit-button.k-button {
+/* .popover-container.popover-modal-content.dynamic-content.submit-button-and-page-nav-wrapper.submit-button.k-button {
   padding: 0.5rem !important;
   background: red !important;
 }
@@ -32,4 +32,15 @@
 .popover-container.popover-modal-content.k-button {
   padding: 3rem !important;
   background: #fff !important;
+} */
+#clevero-forms-modal-p-dr
+  > div
+  > div.dynamic-content
+  > div
+  > div
+  > div.grid-container
+  > div.submit-button-and-page-nav-wrapper
+  > div
+  > button.k-button {
+  padding: 1rem !important; /* Adjust the padding value as needed */
 }
