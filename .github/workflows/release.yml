@@ -34,9 +34,10 @@ jobs:
 
       - name: Create a new release
         uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use GITHUB_TOKEN from environment
         with:
           tag_name: ${{ steps.increment_version.outputs.new_version }}
           release_name: "Release ${{ steps.increment_version.outputs.new_version }}"
           draft: false
           prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }} # Use the GITHUB_TOKEN with the correct permissions
