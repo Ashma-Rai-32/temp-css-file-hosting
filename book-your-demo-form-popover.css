@@ -4,3 +4,12 @@
     right: 1.5rem !important;
   }
 }
+
+.popover-button {
+  text-transform: capitalize !important;
+  font-weight: 400 !important;
+  padding: 10px 15px !important;
+  border-radius: 1rem !important;
+  font-size: medium !important;
+  height: inherit !important;
+}
