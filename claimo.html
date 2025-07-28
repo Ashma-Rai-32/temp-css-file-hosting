@@ -4,28 +4,34 @@
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Sample for Claimo</title>
+
+      <!-- Modifying online forms -->
+      <!-- Copy paste from here  -->
       <style>
-         #clevero-forms .k-field-wrapper {
-         padding: 20px !important;
-         }
-         #clevero-forms .k-drop__value-container{
-         padding: 20px !important;
-         }
-         #clevero-forms .k-button{
-         width: 100%;
-         justify-content: center;
-         padding: 20px 40px;
-         }
-         #clevero-forms .dynamic-content .submit-button-and-page-nav-wrapper {
-         grid-column: span 2;
-         }
-         #clevero-forms .submit-button-and-page-nav-wrapper > div {
-         width: 100%;
-         }
-         #form-index-15100 > textarea
-         {
-         height: 100px !important;
-         }
+        #clevero-forms .k-field-label {
+        font-weight: 300;
+        }
+        #clevero-forms .k-field-wrapper {
+        padding: 20px !important;
+        }
+        #clevero-forms .k-drop__value-container{
+        padding: 20px !important;
+        }
+        #clevero-forms .k-button{
+        width: 100%;
+        justify-content: center;
+        padding: 20px 40px;
+        }
+        #clevero-forms .dynamic-content .submit-button-and-page-nav-wrapper {
+        grid-column: span 2;
+        }
+        #clevero-forms .submit-button-and-page-nav-wrapper > div {
+        width: 100%;
+        }
+        #form-index-15100 > textarea
+        {
+        height: 100px !important;
+        }
       </style>
       <script src="https://forms.clevero.co/clevero-forms.iife.js"></script>
       <script>
@@ -37,7 +43,7 @@
                      embedType: "INLINE",
                      colors:{
                          background:"#F2FBFE",
-                         "primary":"#034f84"
+                         primary:"#034f84"
                      },
                      stylesOverrides:{
                          "clevero-forms-field-input":{
@@ -47,7 +53,7 @@
                              padding:"md"
                          },
                          "clevero-forms-field-label":{
-                             color:"#2d3748"
+                             color:"#2d3748",
                          },
                          "clevero-forms-body":{
                              padding:"55px"
@@ -55,33 +61,36 @@
                          "clevero-forms-footer":{
                              hide:true
                          }
-                         
                      }
                  },
              });
          });
       </script>
+      <!-- till here -->
    </head>
    <body>
-   <div>
-       Start your claim today
-   </div>
-   <div style="
-      font-style: normal;
-      font-weight: 500;
-      font-size: 48px;
-      line-height: 1.35;
-      color: #034f84;">
-      Let's get started on your refund
-   </div>
-   <ul  >
-      <li> 
-         Submit your details.
-      </li>
-      <li>Claimo will conduct a review into your claim and advise of the next steps ASAP.</li>
-      <li>Claimo will work on your insurance refund*</li>
-   </ul>
-   <body>
-      <div id="clevero-forms"></div>
+        <div style="padding: 5rem;">
+            <div style=" display: flex; flex-direction: column; gap: 2rem; ">
+                <div style="display: flex; flex-direction: row; gap: 1rem; align-items: center; color:#034f84">
+                    <div style="border: 2px solid #034f84; width: 100px; height: 0;"></div> Start your claim today
+                </div>
+                <div style="
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 48px;
+                    line-height: 1.35;
+                    color: #034f84;">
+                    Let's get started on your refund
+                </div>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; padding: 0; font-weight: 300;">
+                    <li><i class="fa fa-check" style="margin-right: 6px ;"></i> Submit your details.</li>
+                    <li><i class="fa fa-check" style="margin-right: 6px ;"></i> Claimo will conduct a review into your claim and advise of the next steps ASAP.</li>
+                    <li><i class="fa fa-check" style="margin-right: 6px ;"></i> Claimo will work on your insurance refund*</li>
+                </ul>
+            </div>
+
+            <!-- This is where your online-form will render -->
+            <div id="clevero-forms"></div>
+        </div>
    </body>
 </html>
