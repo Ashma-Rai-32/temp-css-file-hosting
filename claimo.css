@@ -1,3 +1,7 @@
 #clevero-forms input {
     padding: 20px;
 }
+
+#clevero-forms .dynamic-content{
+    background:red
+}
