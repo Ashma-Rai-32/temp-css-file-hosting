@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Sample for Claimo</title>
+      <style>
+         #clevero-forms .k-field-wrapper {
+         padding: 20px !important;
+         }
+         #clevero-forms .k-drop__value-container{
+         padding: 20px !important;
+         }
+         #clevero-forms .k-button{
+         width: 100%;
+         justify-content: center;
+         padding: 20px 40px;
+         }
+         #clevero-forms .dynamic-content .submit-button-and-page-nav-wrapper {
+         grid-column: span 2;
+         }
+         #clevero-forms .submit-button-and-page-nav-wrapper > div {
+         width: 100%;
+         }
+         #form-index-15100 > textarea
+         {
+         height: 100px !important;
+         }
+      </style>
+      <script src="https://forms.clevero.co/clevero-forms.iife.js"></script>
+      <script>
+         document.addEventListener("DOMContentLoaded", function () {
+             CleveroForms({
+                 elementId: "clevero-forms",
+                 formUrl:"https://forms.clevero.co/3457a430-0722-4f87-92de-c01133e8f2a9/fedf7f52-e7a5-490c-8f59-402da1eb7f7d?36284=[302629234]&15178=[813276]",
+                 embeddingConfig: {
+                     embedType: "INLINE",
+                     colors:{
+                         background:"#F2FBFE",
+                         "primary":"#034f84"
+                     },
+                     stylesOverrides:{
+                         "clevero-forms-field-input":{
+                             borderRadius:"5px",
+                             border:"rgba(3, 79, 132, 0.25)",
+                             borderWidth:1,
+                             padding:"md"
+                         },
+                         "clevero-forms-field-label":{
+                             color:"#2d3748"
+                         },
+                         "clevero-forms-body":{
+                             padding:"55px"
+                         },
+                         "clevero-forms-footer":{
+                             hide:true
+                         }
+                         
+                     }
+                 },
+             });
+         });
+      </script>
+   </head>
+   <body>
+   <div>
+       Start your claim today
+   </div>
+   <div style="
+      font-style: normal;
+      font-weight: 500;
+      font-size: 48px;
+      line-height: 1.35;
+      color: #034f84;">
+      Let's get started on your refund
+   </div>
+   <ul  >
+      <li> 
+         Submit your details.
+      </li>
+      <li>Claimo will conduct a review into your claim and advise of the next steps ASAP.</li>
+      <li>Claimo will work on your insurance refund*</li>
+   </ul>
+   <body>
+      <div id="clevero-forms"></div>
+   </body>
+</html>
