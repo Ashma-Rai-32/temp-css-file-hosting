@@ -1,7 +1,21 @@
-#clevero-forms input {
-    padding: 20px;
+#clevero-forms .k-field-wrapper {
+    padding: 7px 20px;
 }
 
-#clevero-forms .dynamic-content{
-    background:red
+#clevero-forms .k-drop__value-container{
+    padding: 7px 20px
+}
+
+#clevero-forms .k-button{
+    width: 100%;
+    justify-content: center;
+    padding: 20px 40px
+}
+
+#clevero-forms .submit-button-and-page-nav-wrapper {
+    grid-column: span 2;
+}
+
+#clevero-forms .submit-button-and-page-nav-wrapper > div {
+    width: 100%;
 }

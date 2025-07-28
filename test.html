@@ -8,11 +8,12 @@
         <script src="https://forms.clevero.co/clevero-forms.iife.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
+                const stylesOverridesUrl="https://cdn.jsdelivr.net/gh/Ashma-Rai-32/temp-css-file-hosting@claimo-1/claimo.css";
                 CleveroForms({
                     elementId: "clevero-forms",
                     // formUrl: "https://forms-v2-qa3.clevero.co/1177d6df-1052-4f75-8ae2-cf1878655a1b/ebda0002-e385-4211-9b32-e48afe18b195",
                     formUrl:"https://forms.clevero.co/3457a430-0722-4f87-92de-c01133e8f2a9/fedf7f52-e7a5-490c-8f59-402da1eb7f7d?36284=[302629234]&15178=[813276]",
-                    stylesOverridesUrl:"https://cdn.jsdelivr.net/gh/Ashma-Rai-32/temp-css-file-hosting/claimo.css",
+                    stylesOverridesUrl,
                     embeddingConfig: {
                         embedType: "INLINE",
                         colors:{
@@ -24,6 +25,9 @@
                                 border:"rgba(3, 79, 132, 0.25)",
                                 borderWidth:1,
                                 padding:"md"
+                            },
+                            "clevero-forms-field-label":{
+                                color:"#2d3748"
                             },
                             "clevero-forms-body":{
                                 padding:"55px 55px 20px 55px"
