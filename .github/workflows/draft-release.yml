@@ -1,0 +1,45 @@
+name: Auto Draft Release (claimo versioning)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  draft-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch all tags
+        run: git fetch --tags
+
+      - name: Determine next tag
+        id: get_tag
+        run: |
+          # Find latest tag starting with "claimo-"
+          latest_tag=$(git tag --list 'claimo-*' | sort -V | tail -n 1)
+
+          echo "Latest tag: $latest_tag"
+
+          if [[ -z "$latest_tag" ]]; then
+            next_tag="claimo-1.0"
+          else
+            version=${latest_tag#claimo-}
+            major=${version%%.*}
+            minor=${version#*.}
+            next_minor=$((minor + 1))
+            next_tag="claimo-${major}.${next_minor}"
+          fi
+
+          echo "Next tag: $next_tag"
+          echo "tag=$next_tag" >> $GITHUB_OUTPUT
+
+      - name: Create release draft
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.get_tag.outputs.tag }}
+          name: Release ${{ steps.get_tag.outputs.tag }}
+          draft: true
