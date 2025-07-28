@@ -12,7 +12,7 @@
     padding: 20px 40px
 }
 
-#clevero-forms .submit-button-and-page-nav-wrapper {
+#clevero-forms .dynamic-content .submit-button-and-page-nav-wrapper {
     grid-column: span 2;
 }
 
